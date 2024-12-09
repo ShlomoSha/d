@@ -68,12 +68,17 @@
         const arrow = document.querySelector('.compass-arrow');
         const label = document.querySelector('.compass-label');
 
+        // Checking if DeviceOrientationEvent is supported
         if (window.DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', (event) => {
-                const alpha = event.alpha; // זווית הצפון המגנטי
-                const heading = 360 - alpha; // מחשב את כיוון הצפון
-                arrow.style.transform = `translate(-50%, -100%) rotate(${heading}deg)`;
-                label.textContent = `Heading: ${heading.toFixed(0)}°`;
+                // Get the alpha value for the device's orientation
+                const alpha = event.alpha; // This gives the rotation around the Z axis (north/south)
+
+                // Update the arrow's rotation based on the alpha value
+                arrow.style.transform = `translate(-50%, -100%) rotate(${alpha}deg)`;
+
+                // Display the heading angle (degree of rotation)
+                label.textContent = `Heading: ${alpha.toFixed(0)}°`;
             });
         } else {
             label.textContent = "DeviceOrientation API not supported.";
