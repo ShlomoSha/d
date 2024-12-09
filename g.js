@@ -6,5 +6,5 @@ window.addEventListener("deviceorientation", e =>{
     a1.textContent = e.alpha
     a2.textContent = e.beta
     a3.textContent = e.gamma
-    a4.textContent = 'the north' + e.gamma
+    a4.textContent = 'the north' + 360 - e.alpha
 })
