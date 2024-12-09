@@ -1,51 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Compass</title>
-        <script src="g.js" defer></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compass</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background: linear-gradient(to bottom, #87CEEB, #4682B4);
             margin: 0;
             padding: 0;
-            background: #f0f0f0;
+            color: white;
         }
+
         .compass-container {
-            margin-top: 50px;
             position: relative;
-            width: 200px;
-            height: 200px;
-            border: 5px solid #333;
+            width: 300px;
+            height: 300px;
+            margin: 50px auto;
             border-radius: 50%;
-            background: #fff;
-            margin-left: auto;
-            margin-right: auto;
+            background: #f8f8f8;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 10px solid #333;
         }
+
         .compass-arrow {
+            position: absolute;
             width: 0;
             height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 50px solid red;
-            position: absolute;
-            top: 25px;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 100px solid red;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%) rotate(0deg);
+            transform: translate(-50%, -100%) rotate(0deg);
             transform-origin: 50% 100%;
         }
-        .compass-heading {
+
+        .compass-label {
             margin-top: 20px;
-            font-size: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .north-marker {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            font-size: 18px;
+            color: black;
         }
     </style>
 </head>
 <body>
+    <h1>Compass</h1>
     <div class="compass-container">
+        <div class="north-marker">N</div>
         <div class="compass-arrow"></div>
     </div>
-    <div class="compass-heading">Heading: 0°</div>
+    <div class="compass-label">Heading: 0°</div>
+
+    <script>
+        const arrow = document.querySelector('.compass-arrow');
+        const label = document.querySelector('.compass-label');
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', (event) => {
+                const alpha = event.alpha; // זווית הצפון המגנטי
+                const heading = 360 - alpha; // מחשב את כיוון הצפון
+                arrow.style.transform = `translate(-50%, -100%) rotate(${heading}deg)`;
+                label.textContent = `Heading: ${heading.toFixed(0)}°`;
+            });
+        } else {
+            label.textContent = "DeviceOrientation API not supported.";
+        }
+    </script>
 </body>
 </html>
