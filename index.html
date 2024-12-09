@@ -3,16 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="g.js" defer></script>
+    <title>Compass</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+        .compass-container {
+            margin-top: 50px;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 5px solid #333;
+            border-radius: 50%;
+            background: #fff;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .compass-arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 50px solid red;
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(0deg);
+            transform-origin: 50% 100%;
+        }
+        .compass-heading {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="com">
-        <div class="a1"></div>
-        <div class="a2"></div>
-        <div class="a3"></div>
-        <div class="a4"></div>
+    <div class="compass-container">
+        <div class="compass-arrow"></div>
     </div>
-
+    <div class="compass-heading">Heading: 0°</div>
+    <script src="compass.js"></script>
 </body>
 </html>

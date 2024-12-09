@@ -1,18 +1,13 @@
-const a1 = document.querySelector(".a1")
-const a2 = document.querySelector(".a2")
-const a3 = document.querySelector(".a3")
-const a4 = document.querySelector(".a4")
+const arrow = document.querySelector('.compass-arrow');
+const headingDisplay = document.querySelector('.compass-heading');
 
-// window.addEventListener("deviceorientation", e =>{
-//     a1.textContent = "al: " + e.alpha
-//     a2.textContent = "b: " + e.beta
-//     a3.textContent = "g: " + e.gamma
-//     a4.textContent = 'the north' + 360 - e.alpha
-// })
-
-window.addEventListener("deviceorientation", (event) => {
-    const alpha = event.alpha; // הכיוון ביחס לצפון מגנטי
-    const compassHeading = 360 - alpha; // חישוב הצפון האמיתי
-    console.log(`Compass Heading: ${compassHeading.toFixed(2)}°`);
-    a1.textContent = `al: ${compassHeading}` 
-});
+if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', (event) => {
+        const alpha = event.alpha; // זווית ביחס לצפון מגנטי
+        const heading = 360 - alpha; // חישוב צפון אמיתי
+        arrow.style.transform = `translateX(-50%) rotate(${heading}deg)`;
+        headingDisplay.textContent = `Heading: ${heading.toFixed(0)}°`;
+    });
+} else {
+    headingDisplay.textContent = "DeviceOrientation API not supported on this device.";
+}
