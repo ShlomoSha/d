@@ -3,86 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compass</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(to bottom, #87CEEB, #4682B4);
-            margin: 0;
-            padding: 0;
-            color: white;
-        }
-
-        .compass-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 50px auto;
-            border-radius: 50%;
-            background: #f8f8f8;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            border: 10px solid #333;
-        }
-
-        .compass-arrow {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 100px solid red;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -100%) rotate(0deg);
-            transform-origin: 50% 100%;
-        }
-
-        .compass-label {
-            margin-top: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .north-marker {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-weight: bold;
-            font-size: 18px;
-            color: black;
-        }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="code.js"></script>
 </head>
 <body>
-    <h1>Compass</h1>
-    <div class="compass-container">
-        <div class="north-marker">N</div>
-        <div class="compass-arrow"></div>
-    </div>
-    <div class="compass-label">Heading: 0°</div>
-
-    <script>
-        const arrow = document.querySelector('.compass-arrow');
-        const label = document.querySelector('.compass-label');
-
-        // Checking if DeviceOrientationEvent is supported
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', (event) => {
-                // Get the alpha value for the device's orientation
-                const alpha = event.alpha; // This gives the rotation around the Z axis (north/south)
-
-                // Update the arrow's rotation based on the alpha value
-                arrow.style.transform = `translate(-50%, -100%) rotate(${alpha}deg)`;
-
-                // Display the heading angle (degree of rotation)
-                label.textContent = `Heading: ${alpha.toFixed(0)}°`;
-            });
-        } else {
-            label.textContent = "DeviceOrientation API not supported.";
-        }
-    </script>
+    <div class="compass">
+        <div class="arrow"></div>
+        <div class="compass-circle"></div>
+        <div class="my-point"></div>
+      </div>
+      <button class="start-btn">Start compass</button>
 </body>
 </html>
